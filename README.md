@@ -3,6 +3,8 @@ This tool prints info and validates a Device Certificate for either a 3DS CTCert
 
 Usage: `./devicecert-validator cert.bin`
 
+Build with CMake - `mkdir build && cd build && cmake .. && make`
+
 ```
 This is a 3DS certificate.
 
