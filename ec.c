@@ -398,7 +398,7 @@ static void point_mul(u8 *d, u8 *a, u8 *b)	// a is bignum
 		}
 }
 
-int check_ecdsa(u8 *Q, u8 *R, u8 *S, u8 *hash)
+int check_ecdsa(u8 *Q, u8 *R, u8 *S, u8 *hash, int isSHA256)
 {
 	u8 Sinv[30];
 	u8 e[30];
@@ -408,9 +408,19 @@ int check_ecdsa(u8 *Q, u8 *R, u8 *S, u8 *hash)
 	bn_inv(Sinv, S, ec_N, 30);
 
 	elt_zero(e);
-	bn_shiftr(hash, 32, 7);  //shift right 7 bits.
-	memcpy(e, hash, 30);     //then shift 16 more bits right by cutting off the last two bytes of 32 byte sha256.
-                             //this gets our bignum sha256 hash to fit in the 233 bit limit of this ecdsa curve.
+
+	if (isSHA256)
+	{
+		bn_shiftr(hash, 32, 7);  //shift right 7 bits.
+		memcpy(e, hash, 30);     //then shift 16 more bits right by cutting off the last two bytes of 32 byte sha256.
+    	                         //this gets our bignum sha256 hash to fit in the 233 bit limit of this ecdsa curve.
+	}
+	else
+	{
+		// Simon - New addition: added support for SHA1, very insecure as top 80 bits are always zeroes
+		memcpy(e + 10, hash, 20);
+	}
+
 	bn_mul(w1, e, Sinv, ec_N, 30);
 	bn_mul(w2, R, Sinv, ec_N, 30);
 

@@ -11,6 +11,6 @@
 
 #include "types.h"
 
-int check_ecdsa(u8 *Q, u8 *R, u8 *S, u8 *hash);
+int check_ecdsa(u8 *Q, u8 *R, u8 *S, u8 *hash, int isSHA256);
 
 #endif
