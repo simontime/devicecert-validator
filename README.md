@@ -1,5 +1,12 @@
-# Device Cert Validator
-This tool prints info and validates a Device Certificate for either a 3DS CTCert or Wii U NG Cert. These certificates are sent to account.nintendo.net for user-verification.
+# Nintendo Device Cert Validator
+
+This tool can identify and validate a Wii, Wii U, or 3DS Device Certificate.
+
+On all devices, these certs are used by the relevant shop channels (Wii Shop, or eShop) to sign tickets (and TMDs? maybe not) uniquely to your device, making it impossible to install on other device.
+
+On WiiU/3DS, these certs are also sent as part of the console-unique data to account.nintendo.net
+
+On Wii, these certificates are used to sign save-games so that only valid Wii saves can be installed on others' consoles (savezelda etc gets around this by using a shared cert)
 
 Usage: `./devicecert-validator cert.bin`
 
