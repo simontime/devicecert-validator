@@ -1,16 +1,20 @@
-# Nintendo Device Cert Validator
+# Nintendo Device Certificate Validator
 
-This tool can identify and validate a Wii, Wii U, or 3DS Device Certificate.
+This tool allows the identification and validation of a Device Certificate for Wii, 3DS, and Wii U.
 
-On all devices, these certs are used by the relevant shop channels (Wii Shop, or eShop) to sign tickets (and TMDs? maybe not) uniquely to your device, making it impossible to install on other device.
+## Installation
 
-On WiiU/3DS, these certs are also sent as part of the console-unique data to account.nintendo.net
+Compile using CMake:
 
-On Wii, these certificates are used to sign save-games so that only valid Wii saves can be installed on others' consoles (savezelda etc gets around this by using a shared cert)
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
 
-Usage: `./devicecert-validator cert.bin`
-
-Build with CMake - `mkdir build && cd build && cmake .. && make`
+## Usage
+`./devicecert-validator cert.bin`
 
 ```
 This is a 3DS certificate.
@@ -22,12 +26,10 @@ Key ID:         CTXXXXXXXX-00
 Valid?          Yes
 ```
 
-```
-This is a Wii U certificate.
+## To Do
+- Add DSi support.
 
-Signature type: ECDSA/SHA-256
-Issuer ID:      Root-CA00000003-MS00000012
-Key type:       ECDSA
-Key ID:         NGXXXXXXXX
-Valid?          Yes
-```
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to test against valid device certificates!
